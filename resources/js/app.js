@@ -4,10 +4,29 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import vueRouter from 'vue-router'; // import vueRouter+
+
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+
+
+
+Vue.use(vueRouter); // tell vue the we will use vueRouter
+
+
+let routes = [
+    { path: '/dashboard', component:  require('./components/DashboardComponent.vue').default},
+    { path: '/profile', component:  require('./components/ProfileComponent.vue').default},
+    { path: '/user', component: require('./components/UserComponent.vue').default},
+]
+
+const router = new VueRouter({
+    mode: 'history', 
+    routes // short for `routes: routes`
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,5 +48,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+
 });
